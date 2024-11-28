@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- 각 필드에 Setter나 메소드가 없기 때문에 bean만 만듦 -->
+  <bean id="adderBean" class="com.min.app01.ex01.Adder" scope="singleton"></bean>
+  <bean id="subtractorBean" class="com.min.app01.ex01.Subtractor" scope="singleton"></bean>
+  <bean id="multiplierBean" class="com.min.app01.ex01.Multiplier" scope="singleton"></bean>
+  <bean id="dividerBean" class="com.min.app01.ex01.Divider" scope="singleton"></bean>
+  
+  
+  <!-- Setter 이용 -->
+  <bean id="calculatorBean1" class="com.min.app01.ex01.Calculator" scope="singleton">
+    <property name="brand">
+      <value>삼성</value>
+    </property>
+    
+    <property name="module1">
+    <ref bean="adderBean"/>
+    </property>
+    
+    <property name="module2">
+    <ref bean="subtractorBean"/>
+    </property>
+    
+    <property name="module3">
+    <ref bean="multiplierBean"/>
+    </property>
+    
+    <property name="module4">
+    <ref bean="dividerBean"/>
+    </property>
+  </bean>
+  
+  <!-- constructor 이용 -->
+  <bean id="calculatorBean2" class="com.min.app01.ex01.Calculator" scope="singleton">
+    <constructor-arg value="필립스" />
+    <constructor-arg ref="adderBean" />
+    <constructor-arg ref="subtractorBean" />
+    <constructor-arg ref="multiplierBean" />
+    <constructor-arg ref="dividerBean" />
+  </bean>
+  
+</beans>

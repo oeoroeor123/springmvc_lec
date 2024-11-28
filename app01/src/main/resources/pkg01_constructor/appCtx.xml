@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- 
+    Setter 작업 없이 생성자를 이용해 bean을 만들 수 있다.
+    Contact contactBean = new Contact("010-1111-1111","user@min.com");
+    Person personBean = new Person("유저",contactBean);
+   -->
+   
+   <!-- 
+    constructor-arg 태그 : 생성자를 이용해 값을 전달하는 태그
+    네임 지정 불가 : 특정 필드에 집어 넣을 수 없고, 필드 순서를 지켜서 값을 전달해야함
+    -->
+
+  <bean id="contactBean" class="com.min.app01.pkg01_constructor.Contact" scope="singleton">
+    <constructor-arg>
+      <value>010-1111-1111</value>
+    </constructor-arg>
+    <constructor-arg value="user@min.com"/>
+  </bean>
+  
+  <bean id="personBean" class="com.min.app01.pkg01_constructor.Person" scope="singleton">
+    <constructor-arg value="유저"/>
+    <constructor-arg ref="contactBean"/>
+  </bean>
+</beans>

@@ -4,10 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <!-- 
-    id = 인스턴스 이름 (contact) / class = 타입 이름. pkg 자동완성 / scope = 자동완성으로 선택
+    id = 인스턴스 이름 (contact) / class = 타입 이름. pkg 자동완성 / scope = 자동완성으로 선택 (singleton / prototype)
     Contact contact = new Contact();
     contact.setMobile("010-1111-1111");
     contact.setEmail("user@min.com");
+    
+    Person person = new Person();
+    person.setName("유저");
+    person.setContact(contact);
   -->
   
   <!-- 
@@ -21,11 +25,35 @@
   <!-- 
     property 태그 : Setter를 이용해서 값을 전달하는 태그 
    -->
-  <bean id="contact" class="com.min.app01.pkg01.Contact" scope="singleton">
+  <bean id="contactBean" class="com.min.app01.pkg01_setter.Contact" scope="singleton">
     <property name="mobile">
       <value>010-1111-1111</value>
     </property>
       <property name="email" value="user@min.com"/>
   </bean> 
+  
+  
+  <!-- 
+  다른 bean 참고하는 방법
+  1. <ref bean="contactBean" /> : property 태그 아래에 ref 태그를 만들기
+  2. property name="contact" ref="contactBean" : property 태그 속성에 넣기
+   -->
+   
+  <bean id="personBean" class="com.min.app01.pkg01_setter.Person" scope="singleton">
+    <property name="name">
+      <value>유저</value>
+    </property>
+    <property name="contact">
+      <ref bean="contactBean"/>
+    </property>
+  </bean>
+
+  
+  
+  
+  
+  
+  
+  
 
 </beans>
