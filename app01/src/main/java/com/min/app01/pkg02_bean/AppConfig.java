@@ -32,6 +32,5 @@ public class AppConfig {
     person.setContact(contact()); // contact 메소드 호출
     return person;
   }
-  
-  
+
 }

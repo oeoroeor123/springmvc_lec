@@ -13,7 +13,7 @@ public class MainClass {
     System.out.println(contact.getMobile());
     System.out.println(contact.getEmail());
     
-    Person person = ctx.getBean("person", Person.class);
+    Person person = ctx.getBean("p", Person.class);
     System.out.println(person.getName());
     System.out.println(person.getContact().getMobile());
     System.out.println(person.getContact().getEmail());

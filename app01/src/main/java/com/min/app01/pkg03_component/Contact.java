@@ -7,7 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Component 
-// 이 Contact 클래스는 이름이 contact인 bean으로 만들어집니다. (디폴트 형식의 생성자를 사용함)
+// 이 Contact 클래스는 이름이 contact인 bean으로 만들어집니다.
+// 디폴트 형식의 생성자를 사용함
 
 @NoArgsConstructor // Contact() 생성자
 @AllArgsConstructor // Contact(String,String) 생성자 

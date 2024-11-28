@@ -32,7 +32,6 @@
       <property name="email" value="user@min.com"/>
   </bean> 
   
-  
   <!-- 
   다른 bean 참고하는 방법
   1. <ref bean="contactBean" /> : property 태그 아래에 ref 태그를 만들기
@@ -47,13 +46,6 @@
       <ref bean="contactBean"/>
     </property>
   </bean>
-
-  
-  
-  
-  
-  
-  
   
 
 </beans>

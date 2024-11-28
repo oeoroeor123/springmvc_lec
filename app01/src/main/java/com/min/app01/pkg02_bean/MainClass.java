@@ -21,6 +21,9 @@ public class MainClass {
     System.out.println(person.getName());
     System.out.println(person.getContact().getMobile());
     System.out.println(person.getContact().getEmail());
+  
+   ctx.close();
+  
   }
 
 }

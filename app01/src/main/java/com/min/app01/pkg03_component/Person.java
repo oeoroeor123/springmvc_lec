@@ -4,8 +4,9 @@ import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 
-@Component // 이 person 클래스는 이름이 person인 bean으로 만들어집니다.
-
+@Component(value="p") // 이 person 클래스는 이름이 p인 bean으로 만들어집니다. > 디폴트 형식의 생성자를 사용함
+// 이름 지정 : value=""
+// 이름 미지정 : 클래스 이름 전체 소문자
 
 @Getter
 public class Person {
