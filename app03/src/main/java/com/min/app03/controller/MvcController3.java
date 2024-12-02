@@ -41,18 +41,18 @@ public class MvcController3 {
   // Query String : sort=ASC&page=1
   @RequestMapping(value="/webdir3/req2")
   public String req2(HttpServletRequest request) {
-    String sort=request.getParameter("sort");
+    String sort = request.getParameter("sort");
     int page = Integer.parseInt(request.getParameter("page"));
     System.out.println(sort + "," + page);
     return "webdir3/req2";
   }
-  
+ 
   
   // Query String : flower=ROSE&flowers=TULIP
   @RequestMapping(value="webdir3/req3")
   public String req3(HttpServletRequest request) {
     String[] flowers = request.getParameterValues("flowers");
-    System.out.println(Arrays.toString(flowers));
+    System.out.println(Arrays.toString(flowers)); // 배열을 문자열로 반환
     return "webdir3/req3";
   }
   
@@ -71,7 +71,7 @@ public class MvcController3 {
     // Parameter page는 ofNullable() 메소드로 담았기 때문에 값이 없어도 오류가 발생되지 않는다.
     // Optional > .of : 100% 값이 있다, .ofNullable : 값이 있을수도 있고 없을수도 있다.
     Optional<String> opt = Optional.ofNullable(request.getParameter("page"));
-    
+   
     // Optional에 담은 Parameter page를 꺼낸다. 이때 Parameter page가 없으면 "디폴트 값 1"을 꺼낸다.
     int page = Integer.parseInt(opt.orElse("1"));
     System.out.println(sort + "," + page);
@@ -91,7 +91,9 @@ public class MvcController3 {
   @RequestMapping(value="/webdir3/req5")
   public String req5(
       @RequestParam(value="sort") String sort // Parameter sort가 전달되지 않으면 잘못된 요청(400) 예외가 발생한다.
-    , @RequestParam(value="page", required=false, defaultValue="1") int page // Parameter page가 전달되지 않으면 기본 값으로 "1"을 사용한다.
+    , @RequestParam(value="page", required=false, defaultValue="1") int page
+      // required=false : 필수가 아니라서, null이 가능하다.
+      // Parameter page가 전달되지 않으면 기본 값으로 "1"을 사용한다.
   ) {
     System.out.println(sort + "," + page);
     return "webdir3/req5";

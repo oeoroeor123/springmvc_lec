@@ -49,7 +49,7 @@ public class MvcController1 {
      /* return "webdir1/index"; 해석해 보기
      * 1. 리턴 값 "index"는 ViewResolver에게 전달 된다.
      *    (DispatcherServlet : servlet-context.xml에 ViewResolver가 정의되어 있다.)
-     * 2. ViewResolver는 "index" 앞에 "/WEB-INF/views/" 문자열을 추가한다. (prefix
+     * 2. ViewResolver는 "index" 앞에 "/WEB-INF/views/" 문자열을 추가한다. (prefix)
      * 3. ViewResolver는 "index" 뒤에 ".jsp" 문자열을 추가한다. (suffix)
      * 4. ViewResolver는 완성된 최종 view로 이동한다.
      *    최종 view의 모습 : "/WEB-INF/views/webdir1/index.jsp"
@@ -69,10 +69,6 @@ public class MvcController1 {
     mav.addObject("number", 10);       // JSP로 number = 10 이라는 값을 전달한다.
     return mav;
   }
-  
-  
-  
-  
-  
+ 
   
 }
