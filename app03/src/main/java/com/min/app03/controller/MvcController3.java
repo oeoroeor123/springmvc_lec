@@ -5,11 +5,14 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.min.app03.vo.PageVo;
+
+import lombok.Builder.Default;
 
 @Controller
 public class MvcController3 {
@@ -46,7 +49,7 @@ public class MvcController3 {
     System.out.println(sort + "," + page);
     return "webdir3/req2";
   }
- 
+
   
   // Query String : flower=ROSE&flowers=TULIP
   @RequestMapping(value="webdir3/req3")
@@ -55,7 +58,7 @@ public class MvcController3 {
     System.out.println(Arrays.toString(flowers)); // 배열을 문자열로 반환
     return "webdir3/req3";
   }
-  
+
   
   // Query String : 없음
   @RequestMapping(value="webdir3/req4")
@@ -112,9 +115,7 @@ public class MvcController3 {
   public String req6(PageVo pageVo) {
     System.out.println(pageVo.getSort() + "," + pageVo.getPage());
     return "webdir3/req6";
+   
   }
-  
-  
-  
-  
+
 }

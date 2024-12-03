@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping(value="/webdir4")
 @Controller
@@ -75,8 +76,6 @@ public class MvcController4 {
     
     return "webdir4/main";
   }
-  
-  
-  
+   
   
 }

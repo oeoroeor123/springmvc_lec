@@ -25,7 +25,7 @@ public class MvcController1 {
    * 1. 요청을 그대로 전달하는 방식
    * 2. 요청에 포함된 요청 파라미터들도 함께 전달된다.
    * 3. Spring MVC Project의 기본 이동 방식이다.
-   * 4. SELECT문의 결과를 전달할 때 사용한다. 
+   * 4. SELECT문의 결과를 전달할 때 사용한다.
    */
   
   @RequestMapping(value="/forward/main.do")
@@ -44,7 +44,7 @@ public class MvcController1 {
     
     // Model model에 전달할 데이터를 속성(Attribute)의 형식으로 저장할 수 있다. (* Spring은 Model 사용을 권장한다.)
     model.addAttribute("address", "서울특별시 강남구 강남대로");
-    
+
     // Map을 전달하기
     model.addAttribute("contact", Map.of("tel","02-123-1234","mobile","010-1234-1234"));
 
