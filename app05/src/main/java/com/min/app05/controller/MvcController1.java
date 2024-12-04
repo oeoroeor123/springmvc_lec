@@ -32,7 +32,7 @@ public class MvcController1 {
     // 세션 유효시간 설정하기 (초 단위로 설정, 시간이 지나면 새로운 세션을 발급 받는다.)
     // 세션의 기본 유효시간은 1800초 입니다.(== 30분)
     // session.setMaxInactiveInterval(5); >> 5초 후에 소멸되는 세션
-    
+
     // id와 pw를 이용해서 UserVo 인스턴스 생성하기
     UserVo userVo = new UserVo();
     userVo.setId(id);
@@ -44,7 +44,6 @@ public class MvcController1 {
     if(id.equals(pw)) {
       // 세션에 저장할때도 속성(Attribute)으로 저장한다.
       session.setAttribute("userVo", userVo);
-      
     } 
     
     // 로그인이 완료된 후 다시 main.jsp로 이동
