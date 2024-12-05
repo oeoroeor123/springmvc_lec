@@ -143,23 +143,68 @@ public class ContactDaoImpl implements IContactDao {
 
   @Override
   public int register(ContactDto contactDto) {
+    // 등록 결과를 저장할 변수 (초기 상태 : 등록 실패)
+    int result = 0;
+   
+    // 데이터베이스 접속
     conn = jdbcConnection.getConnection();
+       
+    try {
+      // 실행할 쿼리문 (인자값은 ? 로 표시)
+      String sql = "INSERT INTO tbl_contact VALUES(null, ?, ?, ?, ?, CURDATE())";
+      // PrepareStatemenet 객체 생성
+      ps = conn.prepareStatement(sql);
+      // 쿼리문에 인자 값 전달 (getter로 각 요소 꺼낸 뒤 setter로 값 전달)
+      ps.setString(1, contactDto.getLast_name());
+      ps.setString(2, contactDto.getFirst_name());
+      ps.setString(3, contactDto.getEmail());
+      ps.setString(4, contactDto.getMobile());
+      // 쿼리문을 실행하고 결과 받기, 결과가 0이면 등록 실패 / 1이면 등록 성공
+      result = ps.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    // 사용한 자원 반납
     jdbcConnection.close(conn, ps, rs);
-    return 0;
+    
+    // 등록 결과 반환
+    return result;
   }
 
   @Override
   public int modify(ContactDto contactDto) {
+    int result = 0;    
     conn = jdbcConnection.getConnection();
+    try {
+      String sql = "UPDATE tbl_contact SET last_name = ?, first_name = ?, email = ?, mobile = ? WHERE contact_id = ?";
+      ps = conn.prepareStatement(sql);
+      ps.setString(1, contactDto.getLast_name());
+      ps.setString(2, contactDto.getFirst_name());
+      ps.setString(3, contactDto.getEmail());
+      ps.setString(4, contactDto.getMobile());
+      ps.setInt(5, contactDto.getContact_id());
+      result = ps.executeUpdate();  
+    } catch (Exception e) {
+      e.printStackTrace();
+    }    
     jdbcConnection.close(conn, ps, rs);
-    return 0;
+    return result;
   }
 
   @Override
   public int remove(int contact_id) {
+    int result = 0;
     conn = jdbcConnection.getConnection();
+    try {
+      String sql = "DELETE FROM tbl_contact WHERE contact_id = ?";
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, contact_id);
+      result = ps.executeUpdate();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     jdbcConnection.close(conn, ps, rs);
-    return 0;
+    return result;
   }
 
 }

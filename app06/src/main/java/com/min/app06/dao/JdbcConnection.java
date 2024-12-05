@@ -32,7 +32,7 @@ public class JdbcConnection {
       String username = "greenit";
       String password = "greenit";
       
-      // 드라이버 클래스 로드 (forName : 클래스 로드를 위한 메소드)
+      // 드라이버 클래스 로드 (forName : 클래스 로드를 위한 메소드, 매개변수에 MySQL Driver을 넣는다.)
       Class.forName(driver);
       
       // 접속 (DriverManager 클래스의 getConnection() 메소드가 접속을 수행한다.)
@@ -44,6 +44,7 @@ public class JdbcConnection {
     return conn;
   }
   
+ 
   
   
   /**

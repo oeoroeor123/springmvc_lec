@@ -26,5 +26,5 @@ public class ContactDto {
   private String email;
   private String mobile;
   private Date create_dt;
-  
+
 }

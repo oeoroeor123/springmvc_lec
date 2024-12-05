@@ -21,6 +21,5 @@ public interface IContactDao { // 행(Row)은 ContactDto 객체에 저장한다.
   int register(ContactDto contactDto); // 등록할 정보를 ContactDto 객체로 만들어서 쿼리에 전달하고 등록된 행(Row)의 갯 수를 반환한다. (성공하면 1, 실패하면 0)
   int modify(ContactDto contactDto); // 수정할 정보를 ContactDto 객체로 만들어서 쿼리에 전달하고 수정된 행(Row)의 갯 수를 반환한다.
   int remove(int contact_id); // 삭제할 행(Row)의 식별자(PK)를 쿼리에 전달하고 삭제된 행(Row)의 갯 수를 반환한다. 
-   
-}
 
+}

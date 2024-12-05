@@ -16,7 +16,7 @@
   <!-- Filter-Mapping : Filter가 동작할 요청 주소 -->
   <filter-mapping>
     <filter-name>characterEncodingFilter</filter-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
 
   <!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
