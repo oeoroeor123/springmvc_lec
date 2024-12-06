@@ -11,19 +11,37 @@ import org.springframework.stereotype.Service;
 import com.min.app06.dao.IContactDao;
 import com.min.app06.dto.ContactDto;
 
+/* 
+ * 작업 순서
+ * 1. 요청
+ * controller > 필요한 요청과 응답을 작성
+ * service > 컨트롤러에서 필요한 작업을 하기위한 코드를 작성 (Dao를 먼저 작업했기때문에, Dao는 호출만 하면 됌)
+ * 
+ * 2. 응답
+ * controller에서 응답 필요한 jsp 파일을 열어서 작업
+ * 
+ */
+
+
 @Service // Service가 사용하는 전용 @Component (Spring Container에 bean으로 등록된다.)
          // 비즈니스 계정 (Business Layer)에서 사용
+         // Controller가 진행하는 요청과 응답 처리를 뒤에서 받쳐주는 역할을 수행(Controller는 최대한 간략하게 코드 작성하며, 필요한 작업은 여기서 함)
 public class ContactServiceImpl implements IContactService {
 
-  @Autowired // DI 필드 주입 (dean 연결)
-  private IContactDao contactDao;  
+  // 인터페이스 구현 클래스
+  
+  @Autowired // DI 필드 주입 (bean 연결) > Dao에 있는 bean을 Service에서 가져다 쓴다.
+  // 서비스는 Dao를 가지고 있어야 메소드 호출이 가능
+  private IContactDao contactDao;
   
   @Override
   public Map<String, Object> getAllContact() {
     // Dao로부터 연락처 목록 받아오기
     List<ContactDto> contacts = contactDao.getContactList();
+    
     // Dao로부터 전체 연락처 갯수 받아오기
     int count = contactDao.getContactCount();
+    
     // 연락처 목록과 전체 연락처 갯수 반환하기
     return Map.of("contacts",contacts,"count",count);
   }

@@ -17,15 +17,17 @@ import com.min.app06.service.IContactService;
 
 @RequestMapping(value="/contact")
 @Controller // 컨트롤러가 사용하는 @Component
+            // 서비스로부터 받아온 데이터를 바탕으로 요청과 응답을 처리하는 곳 (최대한 가볍게 코드 작성)
 public class ContactController {
 
-  @Autowired // DI 필드 주입 (dean 연결)
+  @Autowired // DI 필드 주입 (bean 연결) > Service에 있는 bean을 Controller가 가져다 쓴다.
   private IContactService contactService;
   
   @RequestMapping(value="/list.do")
   public String list(Model model) {
     // 서비스로부터 연락처 목록과 전체 연락처 갯수를 받아온다.
     Map<String, Object> map = contactService.getAllContact();
+    
     // JSP로 전달 (forward)하기 위해서 Model에 저장한다.
     model.addAttribute("contacts", map.get("contacts"));
     model.addAttribute("count", map.get("count"));

@@ -19,7 +19,7 @@
     <button type="button" onclick="fnWriteForm()">등록</button>
   </div>
   
-  <%-- 리스트의 인덱스가 필요한 경우, varStatus 태그 속성을 만들고 인덱스 값을 꺼낸다. --%>
+  <%-- Model에 저장된 리스트 작업 > 리스트의 인덱스가 필요한 경우, varStatus 태그 속성을 만들고 인덱스 값을 꺼낸다. --%>
   <c:forEach var="contact" items="${contacts}" varStatus="vs">
     <div id="contact${vs.index}" class="contact">
       <a href="${contextPath}/contact/detail.do?contact_id=${contact.contact_id}">${contact.contact_id} : ${contact.last_name}</a>

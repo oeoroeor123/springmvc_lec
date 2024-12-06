@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.min.app06.dto.ContactDto;
 
+// 인터페이스 (사용자 요청한 작업을 Dao로 보내주기 위한 작업을 수행)
 public interface IContactService {
 
   // 하나의 서비스에서 여러가지 Dao를 해결할 수 있음 (서비스와 Dao는 1대1 관계가 아님)
