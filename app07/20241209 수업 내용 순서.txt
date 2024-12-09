@@ -1,0 +1,34 @@
+https://code.google.com/archive/a/eclipselabs.org/p/mybatiseditor/downloads
+
+최상단 jar 파일 다운로드 후
+sts 실행 파일 위치 > plugins 폴더에 넣어두기
+
+
+My Batis 작업 순서
+0. 파일 명 : mybatis-config
+마이바티스 기본 환경 설정
+
+1. SQL에서 TABLE 생성
+
+2. 파일 명 : BoardDto / UserDto
+각 TABLE Dto 파일 만들기
+
+3. 파일 명 : root-context
+DataSource 총 4개 만들기 (hikari) 
+
+4. 파일 명 : IBoardDao
+인터페이스로 만들기
+
+5. 파일 명 :  BoardDaoImpl
+클래스 >  IBoardDao 인터페이스 참조해서 만들기 (파일만 미리 만들기)
+
+6. 파일 명 : boardMapper
+mapper 코드 작성하는데, BoardDaoImpl 파일의 각 select 문과 insert, update, delete 문에 활용
+id = 메소드 명
+parameterType = 파라미터
+
+5-1. 파일 명 : BoardDaoImpl
+만들어진 boardMapper 코드를 활용해서 호출 코드 만들기
+
+7. 파일 명 : BoardDaoTest
+테스트 파일 만들어보기
