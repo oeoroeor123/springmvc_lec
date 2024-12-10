@@ -19,7 +19,7 @@ public class BoardDto {
   private int boardId;
   private String title;
   private String contents;
-  private Timestamp create_dt;
-  private int usrId;
-  
+  private Timestamp createDt;
+  // private int usrId;
+  private UserDto userDto; // 쿼리문에서 INNER JOIN을 통해 UserDto의 칼럼을 사용하여 필드로 지정 (usr_id, usr_email, usr_name)
 }

@@ -35,3 +35,11 @@ INSERT INTO tbl_board VALUES (null, '20241210_식단', '마라탕, 마라샹궈'
 INSERT INTO tbl_board VALUES (null, '20241211_식단', '피자, 치킨, 햄버거', '2024-12-07 10:00:00', 2);
 
 COMMIT;
+
+SELECT board_id, title, contents, b.usr_id, usr_email, usr_name, create_dt
+  FROM tbl_board b INNER JOIN tbl_user u
+    ON b.usr_id = u.usr_id
+ORDER BY board_id DESC;
+
+-- 마지막으로 삽입된 PK값 추출하기 --
+SELECT LAST_INSERT_ID();
