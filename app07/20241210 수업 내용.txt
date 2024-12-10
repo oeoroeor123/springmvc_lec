@@ -1,0 +1,8 @@
+20241210 수업 내용
+
+1. DTO 두개 (SQL 테이블) 조인
+Dao에 조건 추가해 테스트 해보기 IBoarDao > BoardDaoImpl > boardMapper > test
+
+2. 동적쿼리
+https://blog.naver.com/hj_kim97/222651531009
+여러가지 동적 쿼리 테스트 해보기
