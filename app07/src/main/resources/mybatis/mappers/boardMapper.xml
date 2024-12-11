@@ -231,6 +231,30 @@
      </where> 
   </select>
   
+  <select id="selectBoardIntegratedSearchCount" parameterType="Map" resultType="int">
+    SELECT
+           COUNT(*)
+      FROM
+           tbl_board b INNER JOIN tbl_user u
+        ON
+           b.usr_id = u.usr_id
+    <where> 
+     <if test="title != ''">
+           title LIKE CONCAT('%', #{query}, '%')     
+     </if>
+     <if test="usrEmail != ''">
+       AND usr_email LIKE CONCAT('%', #{usrEmail}, '%')    
+     </if>
+     <if test="usrName != ''">
+       AND usr_name LIKE CONCAT('%', #{usrName}, '%')     
+     </if>
+     <if test="beginDt != '' and endDt != ''">
+       AND DATE(create_dt) BETWEEN #{beginDt} AND #{endDt}     
+     </if>
+    </where>
+    
+  </select>
+  
 
   <insert id="insertBoard" parameterType="BoardDto">
     INSERT INTO
@@ -258,7 +282,7 @@
     UPDATE
            tbl_board
        <set> <!-- SET 절 대신 <set> 태그를 사용할 때 콤마(,)로 시작하면 이를 제외하고 동작한다. --> 
-       <if test="title != null">
+       <if test="title != ''">
             title = #{title}
        </if>
        <if test="contents != null">

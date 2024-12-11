@@ -1,0 +1,28 @@
+** 20241211 수업 내용
+
+* ${contextPath}는 jsp 파일에서만 적용 가능하다.
+* @repository : Dao에서 사용하는 컴포넌트, Spring Container에 bean을 생성함 > serviceImpl이 사용함
+* @service : 서비스에서 사용하는 컴포넌트, Spring Container에 bean을 생성함 > controller가 사용함
+
+*데이터 처리 순서 (요청 > 응답 순)
+1. 각 영역의 jsp 파일에서 요청사항을 적는다.
+2. jsp의 요청을 controller에서 처리한다.
+3. controller의 일을 service가 한다.
+4. service에서 생긴 메소드는 serviceImpl에서 코드를 작성한다.
+5. Dao 메소드가 추가되면,  DaoImpl에서 추가로 작성한다
+6. Mapper에서 각 요청에 맞는 쿼리문을 완성시켜준다.
+
+[ 파일 순서 ]
+main.jsp / write.jsp / list.jsp / detail.jsp
+
+BoardController
+
+IBoardService
+
+BoardServiceImpl
+
+IBoardDao
+
+BoardDaoImpl
+
+boardMapeer

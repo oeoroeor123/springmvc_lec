@@ -49,7 +49,6 @@ public class BoardDaoImpl implements IBoardDao {
     List<BoardDto> boardList = template.selectList("mybatis.mappers.boardMapper.selectBoardList", sort); // 쿼리문 아이디 = 메소드명 (동일)
     return boardList;
   }
- 
 
   @Override
   public int selectBoardCount() {
@@ -80,6 +79,12 @@ public class BoardDaoImpl implements IBoardDao {
     List<BoardDto> list = template.selectList("mybatis.mappers.boardMapper.selectBoardIntegratedSearch", map);
     return list;
   }
+  
+  @Override
+  public int selectBoardIntegratedSearchCount(Map<String, Object> map) {
+    int boardCount = template.selectOne("mybatis.mappers.boardMapper.selectBoardIntegratedSearchCount", map);
+    return boardCount;
+  }
 
   @Override
   public int insertBoard(BoardDto boardDto) {
@@ -95,14 +100,15 @@ public class BoardDaoImpl implements IBoardDao {
 
   @Override
   public int deleteBoard(int boardId) {
-    int result = template.delete("mybatis.mappers.boardMapper.deleteBoard", template);
+    int result = template.delete("mybatis.mappers.boardMapper.deleteBoard", boardId);
     return result;
   }
   
   @Override
-  public int deleteSelectedBoard(int[] numbers) {
+  public int deleteSelectedBoard(String[] numbers) {
     int result = template.delete("mybatis.mappers.boardMapper.deleteSelectedBoard", numbers);
     return result;
   }
+  
 
 }

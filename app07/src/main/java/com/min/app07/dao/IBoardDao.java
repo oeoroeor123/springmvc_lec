@@ -23,13 +23,15 @@ public interface IBoardDao {
   
   // 통합 검색
   List<BoardDto> selectBoardIntegratedSearch(Map<String, Object>map);
-   
+  int selectBoardIntegratedSearchCount(Map<String, Object> map); 
+  
   // 추가, 수정, 삭제 
   int insertBoard(BoardDto boardDto);
   int updateBoard(BoardDto boardDto);
   int deleteBoard(int boardId);
 
   // array / list / key(Map의 key 값) / field(일반 객체) 전달 가능
-  int deleteSelectedBoard(int[] numbers);
+  int deleteSelectedBoard(String[] numbers);
   
+
 }
