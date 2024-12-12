@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+
+  <!-- Enables the Spring MVC @Controller programming model -->
+  <annotation-driven />
+
+  <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the 
+    ${webappRoot}/resources directory -->
+  <!-- 
+    mapping="/resources/**" : URL을 의미한다 .${contextPaht}/resources/ 경로 밑에 모든 파일 (a/b/c/d.jpg)
+    lacation="/resources/"  : 프로젝트 내부 경로를 의미한다. (root 경로 : src/main/webapp / 나머지 작성 경로 : resources/a/b/c/d.jpg) 
+  -->
+  <resources mapping="/resources/**" location="/resources/" /> <!-- location : 프로젝트 내부 경로(홈페이지 로고 파일) : webapp > resources -->
+  <resources mapping="/upload/**" location="file:/upload/"/> <!-- location : 프로젝트 외부 경로(외부 사람들이 첨부하는 파일) : "file:" 붙여줘야함 -->
+
+  <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views 
+    directory -->
+  <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:property name="prefix" value="/WEB-INF/views/" />
+    <beans:property name="suffix" value=".jsp" />
+  </beans:bean>
+
+  <context:component-scan base-package="com.min.app08" />
+
+</beans:beans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mybatis.mappers.fileMapper"> <!-- namespace : mapper 경로와 이름 작성, 구분자 . -->
+
+  <select id="selectFileList" resultType="FileDto">
+   SELECT file_id, writer, file_path, original_filename, filesystem_name
+     FROM tbl_file
+    ORDER BY file_id DESC
+  </select>
+  
+  <insert id="insertFile" parameterType="FileDto">
+    INSERT INTO tbl_file
+    VALUES (null, #{writer}, #{filePath}, #{originalFilename}, #{filesystemName}) <!-- 변수 처리 : Dto에 필드 이름과 동일하게 작성 -->
+  </insert>
+ 
+</mapper>
