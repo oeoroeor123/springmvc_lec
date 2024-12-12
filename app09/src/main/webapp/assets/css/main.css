@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+  .logo {
+    font-size: 0px;
+    width: 175px;
+    height: 41px;
+    background-image: url('/app09/assets/images/logo_coupang.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin: 20px auto;
+    cursor: pointer;
+  }
+ 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- HikariCP(커넥션 풀 사용을 위한 세팅) : HikariConfig + HikariDataSource -->
+  <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/db_app09?serverTimezone=Asia/Seoul"/>
+    <property name="username" value="greenit"/>
+    <property name="password" value="greenit"/>
+  </bean>
+  
+  <bean id="hikariDataSource" class="com.zaxxer.hikari.HikariDataSource">
+    <constructor-arg ref="hikariConfig"/> <!-- app01 복습해보기 ! -->
+  </bean>
+  
+  
+  <!-- SqlSessionFactoryBean -->
+  <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="hikariDataSource"/>
+    <property name="configLocation" value="classpath:mybatis/configuration/mybatis-config.xml"/> <!-- 마이바티스 환경 설정 파일 위치 등록 -->
+    <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml"/> <!-- 매퍼 파일 위치 등록, 매퍼는 여러개 존재할 수 있기에 lacations로 작성 -->
+  </bean>
+  
+  
+  <!-- SqlSessionTemplate -->
+  <bean id="SqlSessiontemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg ref="sqlSessionFactoryBean"/>
+  </bean>
+  
+  <!-- CommonsMultipartResolver : 파일 업로드를 위한 bean. 스프링이 호출해서 사용하므로, multipartResolver 이름으로 정확히 생성해야 한다. -->
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="defaultEncoding" value="UTF-8"></property>
+    <property name="maxUploadSizePerFile" value="10485760"></property> <!-- 파일 하나 당 업로드 최대치 크기 지정 -->
+    <property name="maxUploadSize" value="104857600"></property> <!-- 다중 첨부된 파일들의 업로드 최대치 크기 지정 -->
+  </bean>
+  
+</beans>
