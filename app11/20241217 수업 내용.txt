@@ -1,0 +1,34 @@
+20241217 수업 내용
+
+1. AOP(관점 지향 프로그래밍)
+1) 특정 시점(관점)에 반복적으로 동작시킬 작업을 등록할 때 사용한다.
+2) 비즈니스 메소드마다 반복해서 처리해야 하는 부분(로깅 처리, 트랜잭션 처리)을 여러번 작성하지 않고 하나의 코드만으로 반복해서 적용하는 프로그래밍 방식을 의미한다.
+3) 
+
+/write.do
+/regist.do
+/modify.do
+/remove.do
+/list.do
+/detail.do
+
+→ 횡단
+(진행 순서)
+
+@Controller > @Service > @Repository(Dao) > DB
+
+        ↑              ↑
+종단(로그남기기)   종단(트랜잭션)
+(반복 동작할 특정 시점)
+
+4) 핵심 용어
+① JoinPoint(조인 포인트) : AOP를 적용할 메소드 전체 (AOP를 적용할 후보 메소드)
+② PointCut (포인트 컷) : 조인 포인트 중에서 AOP를 적용한 메소드  (후보 중에서 선택된 메소드, 모두/일부 가능)
+③ Advice(어드바이스) : AOP 작업 자체(로그, 트랜잭션 등)
+
+5) Advice 동작 시점
+① @Before : PointCut 동작 이전
+② @After : PointCut 동작 이후 (동작 후 예외 발생 여부와 상관 없이 동작)
+③ @Around : PointCut 동작 이전&이후 모두
+④ @AfterReturning : PointCut "정상" 동작 이후 (성공 시 동작) 
+⑤ @AfterThrowing : PointCut "예외" 발생 이후 (예외 발생 시 동작)
