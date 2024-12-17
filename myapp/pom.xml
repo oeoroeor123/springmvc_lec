@@ -10,7 +10,7 @@
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
 
-  <properties>
+ <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 
@@ -18,8 +18,65 @@
     <org.slf4j-version>2.0.13</org.slf4j-version>
     <org.junit-version>5.10.2</org.junit-version>
     <jakarta.servlet-api-version>4.0.1</jakarta.servlet-api-version>
+    <org.aspectj-version>1.9.22.1</org.aspectj-version>
   </properties>
   <dependencies>
+  
+  <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+  <dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>${org.aspectj-version}</version>
+    <scope>runtime</scope>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+  <dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>${org.aspectj-version}</version>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+  <dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.5</version>
+  </dependency>
+  
+  <!--
+  https://mvnrepository.com/artifact/com.zaxxer/HikariCP
+  Connection Pool 라이브러리 (Connection을 미리 만들어 두는 것)
+  - Java Connection Pool API : java.sql.DataSource
+  - Hikari Connection Pool API : com.zaxxer.hikari.HikariDataSource
+  -->
+  
+  <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>5.0.1</version>
+  </dependency>
+
+  <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+  <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${org.springframework-version}</version>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+    <dependency>
+     <groupId>org.mybatis</groupId>
+     <artifactId>mybatis-spring</artifactId>
+      <version>2.1.2</version>
+    </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+     <version>3.5.16</version>
+   </dependency>
   
   <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
     <dependency>
@@ -127,6 +184,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
   <build>
     <plugins>
       <plugin>
@@ -138,6 +196,11 @@
           <showWarnings>true</showWarnings>
           <showDeprecation>true</showDeprecation>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.4.0</version>
       </plugin>
     </plugins>
   </build>

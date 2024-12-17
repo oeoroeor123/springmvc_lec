@@ -2,20 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>블로그 목록</title>
+
+<jsp:include page="../layout/header.jsp">
+  <jsp:param name="title" value="블로그 리스트"/>
+</jsp:include>
+
 <style>
   .blogs:hover {
     cursor: pointer;
     background-color: lightblue;
   }
 </style>
-</head>
-<body>
 
   <div>
     <button type="button" id="btn-write">작성</button>

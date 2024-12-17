@@ -15,12 +15,11 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class BlogDto {
-  private int blog_id;
-  private String title;
-  private String contents;
-  private String user_email;
-  private int hit;
-  private Timestamp modify_dt;
-  private Timestamp create_dt;
+public class NoticeDto {
+
+  private int noticeId;
+  private String noticeTitle;
+  private String noticeContents;
+  private Timestamp createdAt;
+  private int attachCount;
 }

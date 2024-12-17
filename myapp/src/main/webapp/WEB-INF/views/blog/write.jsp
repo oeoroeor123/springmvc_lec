@@ -2,20 +2,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>블로그 작성</title>
+
+<jsp:include page="../layout/header.jsp">
+  <jsp:param name="title" value="블로그 작성하기"/>
+</jsp:include>
+
 <style>
   #contents {
     width: 200px;
     min-height: 200px;
   }
 </style>
-</head>
-<body>
+
 
   <h1>블로그 작성하기</h1>
 
