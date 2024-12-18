@@ -1,0 +1,30 @@
+*20241218 수업 내용 (로그인 / 회원 가입 구현)
+
+[요청 시 spring 동작 순서 ]
+web.xml > servlet-context.xml > @controller > @service > @repository(Dao)
+                                           ↑인터셉터(intetceptor)
+[작업 순서]
+0) mysql 데이터 작업
+
+1) dto 작업
+UserDto을 포함하는 BoardDto 작업하기
+
+2) mybatis-config.xml > 각 dto 별명 지정
+
+3) Mapper.xml > namespace 지정
+
+4) main.jsp > 메인 페이지 생성
+
+5) Dao 인터페이스 / 참조 클래스 생성
+
+6) Mapper.xml > Dao에 있는 코드 참조하여 쿼리문 생성
+
+7) service 작업이 순서상 맞으나, user_pw 작업 먼저 처리하기 위해
+Util > 비밀번호 암호화 작업
+
+8) service 작업 (Util에서 먼저 메소드 만들고, 서비스Impl에서 완성)
+
+9) signup.jsp (회원가입) / login.jsp (로그인) 작업
+
+10) controller 작업
+
