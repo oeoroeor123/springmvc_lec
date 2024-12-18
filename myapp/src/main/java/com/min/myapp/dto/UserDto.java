@@ -1,7 +1,5 @@
 package com.min.myapp.dto;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,12 +13,10 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class NoticeDto {
+public class UserDto {
 
-  private int noticeId;
   private int userId;
-  private String noticeTitle;
-  private String noticeContents;
-  private Timestamp createdAt;
-  private int attachCount;
+  private String userEmail;
+  private String userPw;
+  private String userName;
 }

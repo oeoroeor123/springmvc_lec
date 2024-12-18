@@ -1,11 +1,11 @@
-package com.min.app11.config;
+package com.min.myapp.config;
 
 // import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 // import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import com.min.app11.aop.AroundAdvice;
-import com.min.app11.aop.BeforeAdvice;
+import com.min.myapp.aop.AroundAdvice;
+import com.min.myapp.aop.BeforeAdvice;
 
 /**
  * AOP 동작 확인을 위해서는
