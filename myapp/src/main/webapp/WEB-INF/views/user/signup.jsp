@@ -12,7 +12,7 @@
 <body>
 
   <h1>회원가입</h1>
-  <form action="${contextPath}/main/signup.do" method="post">
+  <form action="${contextPath}/user/signup.do" method="post">
     <input type="text" name="userEmail" placeholder="이메일"><br/>
     <input type="password" name="userPw" placeholder="비밀번호"><br/>
     <input type="text" name="userName" placeholder="이름"><br/>

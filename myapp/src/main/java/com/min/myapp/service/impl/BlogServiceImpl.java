@@ -1,4 +1,4 @@
-package com.min.myapp.service;
+package com.min.myapp.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.min.myapp.dao.IBlogDao;
 import com.min.myapp.dto.BlogDto;
+import com.min.myapp.service.IBlogService;
 
 @Service
 public class BlogServiceImpl implements IBlogService {

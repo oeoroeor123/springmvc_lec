@@ -9,13 +9,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${contextPath}/assets/css/init.css?dt=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" href="${contextPath}/assets/css/header.css?dt=<%=System.currentTimeMillis()%>">
-<script src="${contextPath}/assets/js/main.js?dt=<%=System.currentTimeMillis()%>"></script>
+<script src="${contextPath}/assets/js/header.js?dt=<%=System.currentTimeMillis()%>"></script>
+<script>
+  function displayMsg() {
+    const msg = '${msg}';
+    if(msg !== '')
+      alert(msg);
+  }
+  displayMsg();
+</script>
 <title>${param.title}</title>
 </head>
 <body>
 
-  
   <h1 id="logo" class="logo">Coupang</h1>
+
+  <div class="user-info">
+    <c:if test="${empty sessionScope.loginUser}">
+      <button type="button" onclick="toLoginForm()"><i class="fa-solid fa-arrow-right-to-bracket"></i>로그인</button>
+      <button type="button" onclick="toSignupForm()"><i class="fa-solid fa-user-plus"></i>회원가입</button>
+    </c:if>
+    <c:if test="${not empty sessionScope.loginUser}">
+      <span><a style="color: red;" href="${contextPath}/user/mypage.do?userId=${sessionScope.loginUser.userId}">${sessionScope.loginUser.userName}</a>님 환영합니다.</span>
+      <button type="button" onclick="doLogout()">로그아웃</button>
+    </c:if>
+  </div>
 
   <nav class="gnb-wrap">
     <ul class="gnb">
@@ -27,6 +45,4 @@
     </ul>
   </nav>
   
-  
-  
-  <%-- /body 태그와 /html 태그 삭제 --%>
+  <div class="wrap">

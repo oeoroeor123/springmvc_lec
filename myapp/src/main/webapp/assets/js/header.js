@@ -12,13 +12,27 @@ function getContextPath() {
   return contextPath;
 }
 
-function toMain() {
+function toMainPage() {
   const logo = document.getElementById('logo');
   logo.addEventListener('click', (event) => {
     location.href = getContextPath() + '/main.do';
   })
 }
 
+function toLoginForm() {
+  if(!location.href.includes('login.form')) {
+    location.href = getContextPath() + '/user/login.form? url=' + location.href;
+  }
+}
+
+function toSignupForm() {
+  location.href = getContextPath() + '/user/signup.form';
+}
+
+function doLogout() {
+  location.href = getContextPath() + '/user/logout.do';
+}
+  
 onload = () => {
-  toMain();
+  toMainPage();
 }

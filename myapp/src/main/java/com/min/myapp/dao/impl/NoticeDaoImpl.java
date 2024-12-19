@@ -1,10 +1,11 @@
-package com.min.myapp.dao;
+package com.min.myapp.dao.impl;
 
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.min.myapp.dao.INoticeDao;
 import com.min.myapp.dto.AttachDto;
 import com.min.myapp.dto.NoticeDto;
 

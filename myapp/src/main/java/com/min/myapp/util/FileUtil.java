@@ -18,9 +18,18 @@ public class FileUtil {
    *         경로 구분자는 슬래시(/)를 사용한다.(linux, mac, mindows 모두 사용 가능)
    */
   public String getFilePath() {
-    return "/upload" + DateTimeFormatter.ofPattern("/yyyy/MM/dd").format(today);
+    return "/profile" + DateTimeFormatter.ofPattern("/yyyy/MM/dd").format(today);
   }
   
+  /* 프로필 이미지 경로를 반환하는 메소드
+   * @return 현재 날짜를 경로로 사용. 예들 들어, 2024-12-12일에 실행하는 경우 반환되는 경로는 "/upload/2024/12/12" 입니다.
+   *         경로 구분자는 슬래시(/)를 사용합니다. (linux, mac, windows 모두 사용 가능)
+   */
+  
+  public String getProfilePath() {
+    return "/profile" + DateTimeFormatter.ofPattern("/yyyy/MM/dd").format(today);
+  }
+
   /* 
    * 파일 저장 이름을 반환하는 메소드
    * @param 파일의 원래 이름

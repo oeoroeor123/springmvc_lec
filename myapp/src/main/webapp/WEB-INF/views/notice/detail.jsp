@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
 
 <jsp:include page="../layout/header.jsp">
   <jsp:param name="title" value="${n.noticeTitle}"/>
 </jsp:include>
+
+  <h1>Notice Detail</h1>
 
   <div>작성일시 <fmt:formatDate value="${n.createdAt}" pattern="yyyy-MM-dd a hh:mm:ss"/></div>
 
@@ -41,6 +43,8 @@
     confirmDownload();
   
   </script>
+
+</div>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.min.myapp.dao;
+package com.min.myapp.dao.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.min.myapp.dao.IBlogDao;
 import com.min.myapp.dto.BlogDto;
 
 @Repository

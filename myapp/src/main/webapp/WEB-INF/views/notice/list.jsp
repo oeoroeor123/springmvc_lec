@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
 
 <jsp:include page="../layout/header.jsp">
-  <jsp:param name="title" value="공지사항 리스트" />
+  <jsp:param name="title" value="공지사항"/>
 </jsp:include>
 
   <h1>Notice List</h1>
-
- <div>
+  
+  <div>
     <a href="${contextPath}/notice/write.do">새 공지사항 작성하기</a>
   </div>
 
@@ -31,17 +31,12 @@
         })
       }
     }
-  
-    function msgHandle() {
-      const msg = '${msg}';
-      if(msg !== '')
-        alert(msg);
-    }
-    
+
     detailHandle();
-    msgHandle();
   
   </script>
-  
+
+</div>
+
 </body>
 </html>
