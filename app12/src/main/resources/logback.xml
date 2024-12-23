@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS, Asia/Seoul} %highlight(%-5level) %logger{36} -- %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <!-- root 디렉터리 아래 log 디렉터리를 의미 -->
+  <variable name="LOG_HOME" value="/log"/>
+  
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_HOME}/testFile.log</file>
+    <append>true</append>
+    <!-- set immediateFlush to false for much higher logging throughput -->
+    <immediateFlush>true</immediateFlush>
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS, Asia/Seoul} [%thread] %-5level %logger{36} -- %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  
+  <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!-- rollover daily (매일 새롭게 만들어진다.), %i : 인덱스 (사이즈용, 아래 지정한 최대 크기를 넘어가면 같은 날짜의 파일을 하나 더 만든다.)-->
+      <fileNamePattern>${LOG_HOME}/mylog-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+       <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+       <maxFileSize>100MB</maxFileSize>    
+       <!-- log 파일 가지고 있을 기간 (60일) -->
+       <maxHistory>60</maxHistory>
+       <totalSizeCap>20GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS, Asia/Seoul} [%thread] %-5level %logger{36} -- %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- root logger : 로그 레벨 지정 값, 개발 중에는 DEBUG 방법이 좋으나 개발이 완료되었을땐 INFO 방법을 사용함. -->
+  <root level="DEBUG">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+    <appender-ref ref="ROLLING" />
+  </root>
+</configuration>
