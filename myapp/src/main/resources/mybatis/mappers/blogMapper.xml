@@ -69,4 +69,14 @@
      WHERE attach_id = #{attach_id}
   </update>
   
+  
+<select id="selectblogList" parameterType="Map" resultMap="Map">
+    SELECT blog_id, title, contents, user_email, hit, modify_dt, create_at
+      FROM tbl_blog
+     ORDER BY id ${sort} <!-- 쿼리문 자체 키워드 : 전달된 문자열 그대로 쿼리문에 포함해야 하기에 ${} 사용, 내림차순/오름차순 -->
+     LIMIT #{offset}, #{display} <!-- 변수 값 : 타입에 따라 값을 전달하여 #{} 사용
+                                      offset : 페이지에 따라 달라짐 (어떤 순서의 데이터를 노출시킬건지),
+                                      display : 얼만큼 노출시킬건지  -->
+  </select>
+  
 </mapper>

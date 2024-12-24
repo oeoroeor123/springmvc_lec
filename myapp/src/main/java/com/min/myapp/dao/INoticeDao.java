@@ -1,6 +1,7 @@
 package com.min.myapp.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.min.myapp.dto.AttachDto;
 import com.min.myapp.dto.NoticeDto;
@@ -8,7 +9,10 @@ import com.min.myapp.dto.NoticeDto;
 public interface INoticeDao {
   
   // 목록 보기
-  List<NoticeDto> selectNoticeList();
+  List<NoticeDto> selectNoticeList(Map<String,Object> map);
+  
+  // 페이징 처리를 위한 갯수 체크
+  int selectNoticeCount();
   
   // 상세 보기
   NoticeDto selectNoticeById(int noticeId);
@@ -28,5 +32,9 @@ public interface INoticeDao {
   
   // downloadCount : 다운로드 할 때마다 하나씩 숫자 올리기
   int updateAttachDownloadCount(int attachId);
+  
+  List<NoticeDto> selectSearchList(Map<String, Object> map);
+  
+  int selectSearchCount(Map<String, Object> map);
   
 }

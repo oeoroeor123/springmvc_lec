@@ -4,6 +4,9 @@ import java.io.File;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -17,8 +20,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.min.myapp.dao.INoticeDao;
 import com.min.myapp.dto.AttachDto;
 import com.min.myapp.dto.NoticeDto;
+import com.min.myapp.dto.UserDto;
 import com.min.myapp.service.INoticeService;
 import com.min.myapp.util.FileUtil;
+import com.min.myapp.util.PageUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,10 +34,40 @@ public class NoticeServiceImpl implements INoticeService {
   // service가 dao를 활용, fileUtil도 주입한다.
   private final INoticeDao noticeDao;
   private final FileUtil fileUtil;
+  private final PageUtil pageUtil;
   
   @Override
-  public List<NoticeDto> getNoticeList() {
-    return noticeDao.selectNoticeList(); // db로 부터 목록을 가져와서 그대로 반환한다.
+  public Map<String, Object> getNoticeList(HttpServletRequest request) {
+    
+    // 페이징 처리를 위한 파라미터 page, display 초기값 할당
+    Optional<String> optPage = Optional.ofNullable(request.getParameter("page"));
+    int page = Integer.parseInt(optPage.orElse("1"));
+    
+    Optional<String> optDisplay = Optional.ofNullable(request.getParameter("display"));
+    int display = Integer.parseInt(optDisplay.orElse("5"));
+    
+    // 페이징 처리를 위한 전체 공지 갯수 구하기(페이징 처리를 위해 필수 진행)
+    int total = noticeDao.selectNoticeCount();
+    
+    // 페이징 처리에 필요한 모든 변수 처리
+    pageUtil.setPaging(page, display, total);
+    int offset = pageUtil.getOffset();
+    
+    // 정렬을 위한 파라미터 sort, column
+    Optional<String> optSort = Optional.ofNullable(request.getParameter("sort"));
+    String sort = optSort.orElse("DESC");
+
+    Optional<String> optColumn = Optional.ofNullable(request.getParameter("column"));
+    String column = optColumn.orElse("notice_id");
+    
+    // 목록 가져오기
+    List<NoticeDto> noticeList = noticeDao.selectNoticeList(Map.of("offset", offset, "display", display, "sort", sort, "column", column));
+    
+    // 페이지 이동 링크 가져오기
+    String paging = pageUtil.getPaging(request.getContextPath() + "/notice/list.do", sort, column);
+    
+    // 결과 반환
+    return Map.of("noticeList", noticeList, "total", total, "paging", paging, "offset", offset);
   }
   
   @Override
@@ -41,13 +76,17 @@ public class NoticeServiceImpl implements INoticeService {
     // 1. 공지사항 제목과 내용
     String noticeTitle = multipartRequest.getParameter("noticeTitle");
     String noticeContents = multipartRequest.getParameter("noticeContents");
+    int userId = Integer.parseInt(multipartRequest.getParameter("userId"));
     
     // db로 보낼 Dto 작업
     NoticeDto noticeDto = NoticeDto.builder()
-                            .noticeTitle(noticeTitle)
-                            .noticeContents(noticeContents)
-                            .build();
-    
+                          .noticeTitle(noticeTitle)
+                          .noticeContents(noticeContents)
+                          .userDto(UserDto.builder()
+                                      .userId(userId)
+                                      .build())
+                          .build();
+
     // db에 공지사항 등록 (매퍼의 <selectkey>에 의해서 noticeDto의 noticeId 필드에 값이 채워진다.)
     int result = noticeDao.insertNotice(noticeDto);
     if(result == 0)

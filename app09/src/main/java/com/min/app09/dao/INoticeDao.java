@@ -14,7 +14,7 @@ public interface INoticeDao {
   NoticeDto selectNoticeById(int noticeId);
   
   // 공지 번호에 의한 첨부 목록 보기
-  List<AttachDto> selectAttachListByNoticeId(int noticeId);;
+  List<AttachDto> selectAttachListByNoticeId(int noticeId);
   
   // 파일 다운로드
   AttachDto selectAttachById(int attachId);

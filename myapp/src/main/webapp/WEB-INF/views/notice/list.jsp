@@ -12,13 +12,28 @@
   <div>
     <a href="${contextPath}/notice/write.do">새 공지사항 작성하기</a>
   </div>
-
+  
   <div>
-    <c:forEach items="${noticeList}" var="n">
-      <div class="notices" data-notice-id="${n.noticeId}">
-        공지번호 ${n.noticeId} | ${n.noticeTitle}(${n.attachCount}) ... <fmt:formatDate value="${n.createdAt}" pattern="yyyy.MM.dd HH:mm:ss"/>
-      </div>
-    </c:forEach>
+    <a href="${contextPath}/notice/search.form">검색</a>
+  </div>
+  
+  <div>
+    <select id="sort-column">
+      <option value="notice_id">작성일자</option>
+      <option value="notice_title">제목</option>
+    </select>
+    <button type="button" class="btn-sort" data-sort="ASC">오름차순</button>
+    <button type="button" class="btn-sort" data-sort="DESC">내림차순</button>
+  </div>
+  
+  <div>
+    <div>전체 공지 ${total}개</div>
+    <c:forEach items="${noticeList}" var="n" varStatus="vs">
+    <div class="notices" data-notice-id="${n.noticeId}">
+      ${offset + vs.count} | ${n.noticeTitle} (${n.attachCount})... <fmt:formatDate value="${n.createdAt}" pattern="yyyy.MM.dd HH:mm:ss"/>
+    </div>
+  </c:forEach>
+  <div>${paging}</div>
   </div>
 
   <script>
@@ -32,7 +47,22 @@
       }
     }
 
+    function sortList() {
+      const btnSort = document.getElementByClassName('btn-sort');
+      for(const btn of btnSort) {
+        btn.addEventListener('click', (event) => {
+          location.href  = '${contextPath}/notice/list.do?page=1&sort=' + event.target.dataset.sort + '&column=' + document.getElementById('sort-column').value;
+        })
+      }
+    }
+    
+    function selectOption() {
+      
+    }
+    
+    
     detailHandle();
+    sortList();
   
   </script>
 

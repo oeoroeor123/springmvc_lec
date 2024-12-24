@@ -49,14 +49,13 @@ public class UserServiceImpl implements IUserService {
 
     // 페이지 이동 링크 가져오기
     // request.getContextPath() : 자바 파일에서 contextPath 사용해야 할 경우 사용
-    String paging = pageUtil.getPaging(request.getContextPath() + "/user/list.do", sort); 
+    String paging = pageUtil.getPaging(request.getContextPath() + "/user/list.do", sort);
     
-    // 결과 반환하기 (데이터 리스트, 전체 리스트, 페이지 리스트)
+    // 결과 반환하기 (유저 목록, 전체 인원 수, 페이징 링크, 순번)
     return Map.of("users", users,
                   "total", total,
                   "paging", paging,
                   "offset", pageUtil.getOffset()); // offset = (page - 1) * display; (순번 생성 계산식)
-   
   }
 
 }

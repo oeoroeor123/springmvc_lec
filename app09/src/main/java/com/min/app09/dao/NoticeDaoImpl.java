@@ -18,8 +18,8 @@ public class NoticeDaoImpl implements INoticeDao {
   private final SqlSessionTemplate template;
   
   // 모든 메소드는 return만 있으면 된다.
-  // rsturn 뒤에 template.을 먼저 부른다.
-  // 각 메소드에 맞는 함수 호출 한다.
+  // return 뒤에 template.을 먼저 부른다.
+  // 각 메소드에 맞는 함수를 호출 한다.
   // mapper에 있는 namespace + 메소드 이름을 넣고, 파라미터 여부에 따라 뒤에 넣어준다.
   
   @Override

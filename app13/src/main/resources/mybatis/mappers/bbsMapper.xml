@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mybatis.mappers.bbsMapper"> <!-- 확장자가 들어가지 않아 / 가 아닌 . 로 경로 작성함, 경로로 작성 -->
+  
+  <!-- 게시물 추가 -->
+  <insert id="insertBbs" parameterType="BbsDto">
+    INSERT INTO tbl_bbs
+    VALUES (null, #{contents}, NOW(), 0, 0, LAST_INSERT_ID() + 1, 0) <!-- LAST_INSERT_ID() : 바로 직 전에 사용한 bbs_id ( + 1로 구해야 groupId 가 동일해짐) -->
+  </insert>
+  
+  <!-- 리스트 노출 -->
+  <select id="selectBbsList" parameterType="Map" resultType="BbsDto">
+    SELECT bbs_id, contents, created_at, state, depth, group_id, group_order
+      FROM tbl_bbs
+     ORDER BY group_id DESC, group_order ASC
+     LIMIT #{offset}, #{display}
+  </select>
+  
+  <!-- 페이징 처리를 위한 갯수 -->
+  <select id="selectBbsCount" resultType="int">
+    SELECT COUNT(*)
+      FROM tbl_bbs
+  </select>
+  
+</mapper>

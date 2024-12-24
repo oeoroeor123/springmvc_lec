@@ -41,7 +41,7 @@ public class PageUtil {
     // * display  : 한 페이지에 노출될 데이터 갯수를 곱해줌
     // ex) offset = (1 - 1) * 10 = 0 >> 1 페이지는 0번 데이터(인덱스)부터 시작한다.
     offset = (page - 1) * display;
-    
+
     // pagePerBlock : 한 블록당 표시할 페이지 수 (변수 선언 후 자유롭게 정하면 된다. 정해진 값 x)
     // totalPage : 전체 페이지 갯수
     // 1. total / display 계산 시, double 처리하여 실수(소수점까지)로 처리함
@@ -55,8 +55,7 @@ public class PageUtil {
                                                                 // 1페이지 : Math.min(1 + 10 -1 = 10, totalPage(10보다 작을 경우 이 값을 쓰도록 함))
                                                                 // 1페이지의 경우, 블록 값은 1~10
   }
-      
-  
+
   /**
    * 서비스로 페이지 이동 링크를 문자열 형식으로 반환하는 메소드
    * @param requestURI 서비스가 동작하는 요청 주소
@@ -64,6 +63,7 @@ public class PageUtil {
    */
   
   public String getPaging(String requestURI, String sort) {
+    // 문자열 연결을 위한 전용 클래스 사용 (StringBuilder)
     StringBuilder builder = new StringBuilder();
     
     // <style></style>
@@ -84,7 +84,7 @@ public class PageUtil {
       builder.append("<button type=\"button\" class=\"disabled-button\">&lt;</button>");
     else
       builder.append("<button type=\"button\" onclick=\"location.href='" + requestURI + "?page=" + (beginPage - 1) + "&sort=" + sort + "'\">&lt;</button>");
-    
+       
     // 1  2  3  4  5  6  7  8  9  10
     // <button type="button" onclick="location.href='/app10/user/list.do?page=1'" class="focus-page">1</button>
     // <button type="button" onclick="location.href='/app10/user/list.do?page=2'">2</button>
@@ -98,14 +98,15 @@ public class PageUtil {
       }
     }
     
+    
     // 다음 블록 (>)
     // 1. 링크 없음 : <button type="button" class="disabled-button">&gt;</button>
     // 2. 링크 있음 : <button type="button" onclick="location.href='/app10/user/list.do?page=10'">&gt;</button>
     if(endPage == totalPage)
-      builder.append("<button type=\"button\" class=\"disabled-button\">&gt;</button>");
+      builder.append("<button type=\"button\" class=\"\">&gt;</button>");
     else
       builder.append("<button type=\"button\" onclick=\"location.href='" + requestURI + "?page=" + (endPage + 1) + "&sort=" + sort + "'\">&gt;</button>");
-      
+  
     // </div>
     builder.append("</div>");
     

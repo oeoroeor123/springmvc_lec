@@ -1,0 +1,44 @@
+* 계층형 게시판(커뮤니티)
+
+1. 원글 작성하는 방법
+depth : 0
+group_id : bbs_id
+group_order : 0
+
+2. 댓글 작성하는 방법
+1) 순번 (기존 댓글 업데이트)
+같은 그룹 내 댓글 중 원글의 group_order 보다 큰 group_order를 가지는 댓글
+(= 원글 제외한 모든 기존 댓글)의 group_order를 1씩 증가 시킨다.
+
+2) 댓글 등록
+depth : 원글의 depth + 1
+group_id : 원글의 group_id
+group_order : 원글의 group_order + 1
+
+3) 정렬 기준
+ex) 테이블 예시
+[ 정렬 전 ]
+bbs_id  contents  depth group_id  group_order
+1        오늘 점심    0         1             0
+2        ㄴ 1.백반    1         1             1 > 2 > 3 > 4 > 5(대댓글이 달렸기 때문에 1이 증가됨_기존 댓글 업데이트)
+3        ㄴ 2.짬뽕    1         1             1 > 2 > 3 > 4
+4        오늘 저녁    0         4              0
+5        ㄴ 3.국밥    1         1              1 (원글 : 5)
+6         ㄴ a.국밥노 2         1              2 > 3 (원글 : 5)
+7         ㄴ b.난찬성 2         1              2 (원글 : 5)
+
+* 1차 정렬
+group_id DESC
+
+* 2차 정렬 
+group_order ASC
+
+[ 정렬 후 ]
+bbs_id  contents  depth group_id  group_order
+4        오늘 저녁    0         4              0
+1        오늘 점심    0         1             0
+5        ㄴ 3.국밥    1         1              1 (원글 : 5)
+7         ㄴ b.난찬성 2         1              2 (원글 : 5)
+6         ㄴ a.국밥노 2         1              2 > 3 (원글 : 5)
+3        ㄴ 2.짬뽕    1         1             1 > 2 > 3 > 4
+2        ㄴ 1.백반    1         1             1 > 2 > 3 > 4 > 5(대댓글이 달렸기 때문에 1이 증가됨_기존 댓글 업데이트)

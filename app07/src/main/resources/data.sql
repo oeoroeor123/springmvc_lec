@@ -43,3 +43,4 @@ ORDER BY board_id DESC;
 
 -- 마지막으로 삽입된 PK값 추출하기 --
 SELECT LAST_INSERT_ID();
+

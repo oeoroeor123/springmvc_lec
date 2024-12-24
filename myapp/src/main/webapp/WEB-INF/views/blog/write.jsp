@@ -20,7 +20,7 @@
   
     <div>
       <label for="user_email">작성자 이메일</label>
-      <input type="text" name="user_email" id="user_email">
+      <input type="text" name="user_email" id="user_email" value="${sessionscope.loginuser.useremail}" readonly>  
     </div>
     
     <div>

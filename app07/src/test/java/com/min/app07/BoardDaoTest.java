@@ -83,7 +83,7 @@ class BoardDaoTest {
   
   @Test
   void 선택항목삭제테스트() {
-   int[] numbers = {1,2,3};
+   String[] numbers = {"1","2","3"};
    assertEquals(numbers.length, boardDao.deleteSelectedBoard(numbers)); // 삭제된 행의 갯수를 확인한다.
   }
   

@@ -19,6 +19,12 @@
   <div>
     <button type="button" id="btn-write">새 블로그 작성하기</button>
   </div>
+  
+  <div>
+    <input type="text" name="search" placeholder="검색">
+    <button type="submit" id="btn-search">검색하기</button>
+  </div>
+  
 
   <table border="1">
     <thead>
@@ -58,8 +64,15 @@
       }      
     }
     
+    function tosearch() {
+      document.getElementById('btn-search').addEventListener('click', (event) => {
+        location.href='${contextPath}/blog/search.do';
+      })
+    }
+    
     toBlogWrite();
     toBlogDetail();
+    tosearch();
     
   </script>
 

@@ -35,7 +35,7 @@
   
   <insert id="insertNotice" parameterType="NoticeDto">
     INSERT INTO tbl_notice
-    VALUES (null, #{noticeTitle}, #{noticeContents}, NOW())
+    VALUES (null, #{userDto.userId}, #{noticeTitle}, #{noticeContents}, NOW())
     <selectKey keyProperty="noticeId" resultType="int" order="AFTER">
      <!--
      마지막으로 삽입한 AUTO_INCREMENT (ID), NoticeDto 필드 중 noticeId에 저장한다.

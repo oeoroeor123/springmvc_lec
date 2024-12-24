@@ -109,6 +109,5 @@ public class BoardDaoImpl implements IBoardDao {
     int result = template.delete("mybatis.mappers.boardMapper.deleteSelectedBoard", numbers);
     return result;
   }
-  
 
 }

@@ -2,6 +2,9 @@ package com.min.myapp.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,15 +12,18 @@ import org.springframework.stereotype.Service;
 import com.min.myapp.dao.IBlogDao;
 import com.min.myapp.dto.BlogDto;
 import com.min.myapp.service.IBlogService;
+import com.min.myapp.util.PageUtil;
 
 @Service
 public class BlogServiceImpl implements IBlogService {
 
   private IBlogDao blogDao;
+  private PageUtil pageUtil;
   
   @Autowired  // Setter 형식의 메소드를 이용한 DI 방식입니다. 매개변수로 bean이 주입되면 필드로 전달됩니다.
-  public void prepare(IBlogDao blogDao) {
+  public void prepare(IBlogDao blogDao, PageUtil pageUtil) {
     this.blogDao = blogDao;
+    this.pageUtil = pageUtil;
   }
   
   @Override
@@ -83,5 +89,46 @@ public class BlogServiceImpl implements IBlogService {
     
     // 확인해야 하는 정보
     // boardDto1과 boardDto2가 모두 등록 실패하면, 트랜잭션 매니저가 정상적으로 동작한 것이다.
+  }
+  
+  @Override
+  public Map<String, Object> getBlogList(HttpServletRequest request) {
+    
+    // page 파라미터
+    Optional<String> optPage = Optional.ofNullable(request.getParameter("page"));
+    int page = Integer.parseInt(optPage.orElse("1"));
+    
+    // display 파라미터
+    Optional<String> optDisplay = Optional.ofNullable(request.getParameter("display"));
+    int display = Integer.parseInt(optDisplay.orElse("20"));
+   
+    // total 파라미터
+    int total = blogDao.selectBlogCount();
+    
+    // pageUtil의 페이징 처리 메소드 부르기
+    pageUtil.setPaging(page, display, total);
+    
+    // sort 파라미터
+    Optional<String> optSort = Optional.ofNullable(request.getParameter("sort"));
+    String sort = optSort.orElse("DESC");
+    
+    List<BlogDto> blogs = blogDao.selectBlogList(Map.of("offset", pageUtil.getOffset(),
+                                                        "display", pageUtil.getDisplay(),
+                                                        "sort", sort));
+    
+    // 페이지 이동 링크 가져오기
+    String paging = pageUtil.getPaging(request.getContextPath() + "/blog/list.do", sort);
+    
+    // 결과 반환
+    return Map.of(               
+                  "blogs", blogs,
+                  "total", total,
+                  "paging", paging,
+                  "offset", pageUtil.getOffset());
+  }
+  
+  @Override
+  public String searchBlog(BlogDto blogDto) {
+    return blogDao.toString();
   }
 }  
