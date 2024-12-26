@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="mybatis.mappers.userMapper"> <!-- 확장자가 들어가지 않아 / 가 아닌 . 로 경로 작성함, 경로로 작성 -->
+<mapper namespace="mybatis.mappers.userMapper">
   
- <!-- 회원 가입 (유저 추가) -->
- <insert id="insertUser" parameterType="UserDto">
-  INSERT INTO tbl_user
-    VALUES (null, #{userEmail}, #{userPw}, #{userName}, null) <!-- 문자열 칼럼으로 #{} 사용 -->
- </insert>
- 
-  <!-- 사용자 개개인 정보 체크용 -->
+  <insert id="insertUser" parameterType="UserDto">
+    INSERT INTO tbl_user
+    VALUES (null, #{userEmail}, #{userPw}, #{userName}, null)
+  </insert>
+  
   <select id="selectUserByMap" parameterType="Map" resultType="UserDto">
     SELECT user_id, user_email, user_pw, user_name, profile_img
       FROM tbl_user
@@ -23,9 +21,8 @@
   <update id="updateUserInfo" parameterType="UserDto">
     UPDATE tbl_user
       <set>
-      <!-- userEmail과 userName이 빈문자열이 아니면 개인정보 변경(업데이트) -->
-      <if test="userEmail != ''">user_email = #{userEmail}</if>
-      <if test="userName != ''">, user_name = #{userName}</if>
+        <if test="userEmail != ''">user_email = #{userEmail}</if>
+        <if test="userName != ''">, user_name = #{userName}</if>
       </set>
      WHERE user_id = #{userId}
   </update>
@@ -42,10 +39,10 @@
      WHERE user_id = #{userId}
   </update>
   
-  <delete id="deleteUser">
+  <delete id="deleteUser" parameterType="int">
     DELETE
       FROM tbl_user
      WHERE user_id = #{userId}
   </delete>
- 
+  
 </mapper>

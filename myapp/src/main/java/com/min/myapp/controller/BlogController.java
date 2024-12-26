@@ -28,13 +28,11 @@ public class BlogController {
   
   @RequestMapping(value="/list.do")
   public String list(HttpServletRequest request, Model model) {
-    // 블로그 목록(blogList)과 전체 블로그 개수(count)를 list.jsp로 전달합니다.
+    // 블로그 목록(blogList)과 페이지 링크(paging)와 전체 블로그 개수(total)와 목록 시작 번호(offset)를 list.jsp로 전달합니다.
     Map<String, Object> map = blogService.getBlogList(request);
     model.addAttribute("blogList", map.get("blogList"));
-    model.addAttribute("count", map.get("count"));
-    model.addAttribute("blogs", map.get("blogs"));
-    model.addAttribute("total", map.get("total"));
     model.addAttribute("paging", map.get("paging"));
+    model.addAttribute("total", map.get("total"));
     model.addAttribute("offset", map.get("offset"));
     return "blog/list";
   }
@@ -76,6 +74,7 @@ public class BlogController {
   
   @RequestMapping(value="/write.do")
   public String write() {
+    // write.jsp 로 이동합니다.
     return "blog/write";
   }
   
@@ -86,7 +85,6 @@ public class BlogController {
     // 삽입 뒤 결과 메시지(msg)를 /list.do 요청하면서 전달합니다.
     redirectAttributes.addFlashAttribute("msg", blogService.registerBlog(blogDto));
     return "redirect:/blog/list.do";
-  } 
-
+  }
   
 }

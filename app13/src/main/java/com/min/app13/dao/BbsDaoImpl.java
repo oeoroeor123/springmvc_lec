@@ -33,5 +33,20 @@ public class BbsDaoImpl implements IBbsDao {
     log.debug(template.toString());
     return template.selectOne("mybatis.mappers.bbsMapper.selectBbsCount");
   }
+  
+  @Override
+  public int updateGroupOrder(BbsDto bbsDto) {
+    return template.update("mybatis.mappers.bbsMapper.updateGroupOrder", bbsDto);
+  }
+  
+  @Override
+  public int insertBbsReply(BbsDto bbsDto) {
+    return template.insert("mybatis.mappers.bbsMapper.insertBbsReply", bbsDto);
+  }
+  
+  @Override
+  public int deleteBbs(int bbsId) {
+    return template.update("mybatis.mappers.bbsMapper.deleteBbs", bbsId);
+  }
 
 }

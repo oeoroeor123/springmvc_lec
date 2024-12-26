@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .logo {
   font-size: 0px;
   width: 175px;
@@ -11,7 +10,10 @@
   margin: 20px auto;
   cursor: pointer;
 }
-
+.user-info {
+  text-align: right;
+  margin: 0 30px;
+}
 .gnb-wrap {
   width: 100%;
   margin-top: 50px;

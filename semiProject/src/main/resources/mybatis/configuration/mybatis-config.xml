@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+  <!-- 마이바티스 환경 설정 세부 항목 -->
+  <settings>
+    <setting name="mapUnderscoreToCamelCase" value="true"/>
+  </settings>
+  
+  <!-- 매퍼에서 사용할 클래스의 별명 지정하기 -->
+  <typeAliases>
+    <typeAlias type="com.min.semiProject.dto.UserDto" alias="UserDto"/>
+    <typeAlias type="com.min.semiProject.dto.BlogDto" alias="BlogDto"/>
+    <typeAlias type="com.min.semiProject.dto.CommentDto" alias="CommentDto"/>
+  </typeAliases>
+
+</configuration>

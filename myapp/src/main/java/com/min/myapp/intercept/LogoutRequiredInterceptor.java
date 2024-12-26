@@ -13,14 +13,13 @@ import org.springframework.web.servlet.HandlerInterceptor;
  * 로그인 화면, 회원가입 화면으로 이동할 수 없도록 제어하는 인터셉터
  * @author Administrator
  */
-public class LoginNoRequiredInterceptor implements HandlerInterceptor {
+public class LogoutRequiredInterceptor implements HandlerInterceptor {
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     
     HttpSession session = request.getSession();
-    
-    if(session.getAttribute("loginUser") != null) { // loginUser가 null이 아니라면, (로그인 상태라면,) 리턴값 false
+    if(session.getAttribute("loginUser") != null) {
       response.setContentType("text/html; charset=UTF-8");
       PrintWriter out = response.getWriter();
       out.println("<script>");

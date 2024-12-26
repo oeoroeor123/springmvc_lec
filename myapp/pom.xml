@@ -10,7 +10,7 @@
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
 
-  <properties>
+ <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 
@@ -20,72 +20,92 @@
     <jakarta.servlet-api-version>4.0.1</jakarta.servlet-api-version>
     <org.aspectj-version>1.9.22.1</org.aspectj-version>
   </properties>
-  
   <dependencies>
-
-    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjweaver</artifactId>
-      <version>${org.aspectj-version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    
-    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>${org.aspectj-version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-    <dependency>
-      <groupId>commons-fileupload</groupId>
-      <artifactId>commons-fileupload</artifactId>
-      <version>1.5</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.5.16</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis-spring</artifactId>
-      <version>2.1.2</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>${org.springframework-version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
-    <dependency>
+  
+  <!-- Logging -->
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${org.slf4j-version}</version>
+  </dependency>  
+  
+  <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+  <dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.3.14</version>
+    <scope>test</scope>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+  <dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>${org.aspectj-version}</version>
+    <scope>runtime</scope>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+  <dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>${org.aspectj-version}</version>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+  <dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.5</version>
+  </dependency>
+  
+  <!--
+  https://mvnrepository.com/artifact/com.zaxxer/HikariCP
+  Connection Pool 라이브러리 (Connection을 미리 만들어 두는 것)
+  - Java Connection Pool API : java.sql.DataSource
+  - Hikari Connection Pool API : com.zaxxer.hikari.HikariDataSource
+  -->
+  
+  <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
       <version>5.0.1</version>
-    </dependency>
+  </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
-    <dependency>
-      <groupId>com.mysql</groupId>
-      <artifactId>mysql-connector-j</artifactId>
-      <version>8.0.33</version>
-    </dependency>
-    
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
-    <dependency>
+  <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+  <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
+      <artifactId>spring-jdbc</artifactId>
       <version>${org.springframework-version}</version>
-      <scope>test</scope>
+  </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+    <dependency>
+     <groupId>org.mybatis</groupId>
+     <artifactId>mybatis-spring</artifactId>
+      <version>2.1.2</version>
+    </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+     <version>3.5.16</version>
+   </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${org.springframework-version}</version>
+        <scope>test</scope>
+    </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>8.0.33</version>
     </dependency>
   
     <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -109,59 +129,36 @@
         </exclusion>
       </exclusions>
     </dependency>
-    
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>${org.springframework-version}</version>
     </dependency>
 
-    <!-- Logging -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${org.slf4j-version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>${org.slf4j-version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${org.slf4j-version}</version>
-      <scope>runtime</scope>
-    </dependency>
-
     <!--
-      Tomcat 9.0 과 함께 사용해야 하는 버전 정리
-      
-      1. Servlet 4.0.1
-      2. JSP 2.3.3
-      3. JSTL 1.2.5
+    TOMCAT 9.0과 함께 사용해야 하는 버전 정리
+    1. Servlet 4.0.1
+    2. JSP 2.3.3
+    3. JSTL 1.25  
     -->
 
     <!-- Servlet -->
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- JSP -->
-    <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>2.3.3</version>
-      <scope>provided</scope>
-    </dependency>
+   <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.1</version>
+    <scope>provided</scope>
+   </dependency>
+   
+   <!-- JSP -->
+   <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+   <dependency>
+    <groupId>javax.servlet.jsp</groupId>
+    <artifactId>javax.servlet.jsp-api</artifactId>
+    <version>2.3.3</version>
+    <scope>provided</scope>
+   </dependency>
 
     <!-- JSTL -->
     <dependency>
@@ -182,7 +179,6 @@
       <version>${org.junit-version}</version>
       <scope>test</scope>
     </dependency>
-    
   </dependencies>
   
   <build>
@@ -204,5 +200,4 @@
       </plugin>
     </plugins>
   </build>
-  
 </project>

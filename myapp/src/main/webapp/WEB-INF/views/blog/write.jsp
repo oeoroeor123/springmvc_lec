@@ -20,7 +20,7 @@
   
     <div>
       <label for="user_email">작성자 이메일</label>
-      <input type="text" name="user_email" id="user_email" value="${sessionscope.loginuser.useremail}" readonly>  
+      <input type="text" name="user_email" id="user_email" value="${sessionScope.loginUser.userEmail}" readonly>
     </div>
     
     <div>
@@ -45,7 +45,6 @@
       const formWrite = document.getElementById('form-write');
       const userEmail = document.getElementById('user_email');
       const title = document.getElementById('title');
-      
       formWrite.addEventListener('submit', (event) => {
         if(userEmail.value === '') {
           alert('작성자 이메일은 필수입니다.');
@@ -61,9 +60,7 @@
         }
       })
     }
-    
     submitForm();
-    
   </script>
 
 </div>

@@ -23,7 +23,7 @@ public class BbsServiceImpl implements IBbsService {
  
   @Override
   public String registBbs(BbsDto bbsDto) {
-    return bbsDao.insertBbs(bbsDto) == 1 ? "작성 성공" : "작성 실패";
+    return bbsDao.insertBbs(bbsDto) == 1 ? "게시글 작성 성공" : "게시글 작성 실패";
   }
   
   @Override
@@ -56,7 +56,35 @@ public class BbsServiceImpl implements IBbsService {
     String paging = pageUtil.getPaging(request.getContextPath() + "/bbs/list.do", "");
     
     return Map.of("offset", offset, "count", count, "bbsList", bbsList, "paging", paging);
-    
   }
+    
+    // 댓글 업데이트 및 추가
+    @Override
+    public String registBbsReply(BbsDto bbsDto) {
+      
+      /*
+       * 파라미터 BbsDto bbsDto는 아래 값을 가지고 있습니다.
+       *   contents   : 댓글의 내용
+       *   depth      : 원글의 depth
+       *   groupId    : 원글의 groupId
+       *   groupOrder : 원글의 groupOrder
+       */
+      
+      // 1. 기존 댓글의 group_order 업데이트
+      bbsDao.updateGroupOrder(bbsDto);
+      
+      // 2. 댓글 등록
+      bbsDto.setDepth(bbsDto.getDepth() + 1); // 댓글의 depth = 원글의 depth + 1
+      bbsDto.setGroupId(bbsDto.getGroupId()); // 댓글의 groupId = 원글의 groupId (설명을 위한 코드로, 실제 작성 x)
+      bbsDto.setGroupOrder(bbsDto.getGroupOrder() + 1); // 댓글의 groupOrder = 원글의 groupOrder + 1
 
+      return bbsDao.insertBbsReply(bbsDto) == 1 ? "댓글 작성 성공" : "댓글 작성 실패";
+    }
+    
+    // 게시글 삭제하기
+    @Override
+    public String deleteBbs(int bbsId) {
+      return bbsDao.deleteBbs(bbsId) == 1 ? "게시글 삭제 성공" : "게시글 삭제 실패";
+    }
+    
 }

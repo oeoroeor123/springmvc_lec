@@ -40,7 +40,7 @@ public class UserController {
   public String loginForm(HttpServletRequest request, Model model) {
     Optional<String> opt = Optional.ofNullable(request.getParameter("url"));
     String url = opt.orElse("http://localhost:8080/" + request.getContextPath());
-    model.addAttribute("url",url);
+    model.addAttribute("url", url);
     return "user/login";
   }
   
@@ -89,24 +89,20 @@ public class UserController {
       redirectAttributes.addFlashAttribute("msg", "프로필을 선택하세요.");
       return "redirect:/";
     } 
-    // 프로필 변경 성공
     try {
       redirectAttributes.addFlashAttribute("msg", userService.modifyProfile(profile, userId));
       return "redirect:/user/mypage.do?userId=" + userId;
-    // 프로필 변경 실패
     } catch (Exception e) {
       redirectAttributes.addFlashAttribute("msg", "프로필 변경 실패");
       return "redirect:/";
     }
   }
   
-  // 비밀번호 변경 
   @RequestMapping(value="/repw.form")
   public String repwForm() {
     return "user/repw";
   }
 
-  // 비밀번호 변경 확인
   @RequestMapping(value="/repw.do", method=RequestMethod.POST)
   public String repw(UserDto userDto, RedirectAttributes redirectAttributes) {
     redirectAttributes.addFlashAttribute("msg", userService.modifyPw(userDto));
@@ -116,7 +112,7 @@ public class UserController {
   @RequestMapping(value="/deleteAccount.do")
   public String deleteAccount(HttpSession session, RedirectAttributes redirectAttributes) {
     int userId = ((UserDto) session.getAttribute("loginUser")).getUserId();
-    session.invalidate(); // 세션 초기화 작업 (로그아웃)
+    session.invalidate();
     redirectAttributes.addFlashAttribute("msg", userService.deleteAccount(userId));
     return "redirect:/";
   }

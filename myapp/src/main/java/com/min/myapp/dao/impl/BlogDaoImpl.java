@@ -9,13 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.min.myapp.dao.IBlogDao;
 import com.min.myapp.dto.BlogDto;
-
-import lombok.RequiredArgsConstructor;
 
 @Repository
 public class BlogDaoImpl implements IBlogDao {
@@ -42,7 +39,7 @@ public class BlogDaoImpl implements IBlogDao {
     List<BlogDto> blogList = new ArrayList<BlogDto>();
     try {
       connect();
-      String sql = "SELECT blog_id, title, contents, user_email, hit, modify_dt, create_dt FROM tbl_blog ORDER BY blog_id DESC";
+      String sql = "SELECT blog_id, title, contents, user_email, hit, modify_dt, create_dt FROM tbl_blog ORDER BY blog_id " + map.get("sort") + " LIMIT ?, ?";
       ps = conn.prepareStatement(sql);
       ps.setInt(1, (int)map.get("offset"));
       ps.setInt(2, (int)map.get("display"));
@@ -172,11 +169,6 @@ public class BlogDaoImpl implements IBlogDao {
       e.printStackTrace();
     }
     return result;
-  }
-  
-  @Override
-  public List<BlogDto> selectBlogList(Map<String, Object> map) {
-    return template.selectList("mybatis.mappers.blogMapper.selectBlogList", map);
   }
 
 }

@@ -20,24 +20,20 @@ import com.min.myapp.service.INoticeService;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @RequestMapping(value="/notice")
 @Controller
+@RequiredArgsConstructor
 public class NoticeController {
-  
-  // controller가 service를 활용
+
   private final INoticeService noticeService;
   
   @RequestMapping(value="/list.do")
   public String list(HttpServletRequest request, Model model) {
-    
     Map<String, Object> map = noticeService.getNoticeList(request);
-      
-    // 서비스로부터 받아온 getNoticeList 값을 모델에 저장하고, list.jsp로 포워드한다.
     model.addAttribute("noticeList", map.get("noticeList"));
     model.addAttribute("total", map.get("total"));
     model.addAttribute("paging", map.get("paging"));
-    model.addAttribute("offset", map.get("offset"));    
+    model.addAttribute("offset", map.get("offset"));
     return "notice/list";
   }
   
@@ -47,7 +43,6 @@ public class NoticeController {
   }
   
   @RequestMapping(value="/regist.do", method=RequestMethod.POST)
-  // enctype="multipart/form-data"를 받아내는 request
   public String regist(MultipartHttpServletRequest multipartRequest, RedirectAttributes redirectAttributes) {
     redirectAttributes.addFlashAttribute("msg", noticeService.registNotice(multipartRequest));
     return "redirect:/notice/list.do";
@@ -89,7 +84,5 @@ public class NoticeController {
     model.addAttribute("offset", map.get("offset"));
     return "notice/search";
   }
-  
-  
   
 }

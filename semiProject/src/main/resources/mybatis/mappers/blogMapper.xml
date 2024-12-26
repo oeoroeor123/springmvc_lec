@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mybatis.mappers.blogMapper">
+  
+ <select id="selectBlogList" parameterType="Map" resultType="BlogDto">
+  SELECT blog_id, user_id, title, hit, contents, create_dt, modify_dt
+    FROM tbl_blog
+   ORDER BY blog_id ${sort}
+   LIMIT #{offset}, #{display} 
+ </select>
+  
+ <select id="selectBlogCount" resultType="int">
+  SELECT COUNT(*)
+    FROM tbl_blog
+ </select>
+  
+</mapper>

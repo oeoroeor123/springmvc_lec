@@ -25,8 +25,6 @@ public class LoginRequiredInterceptor implements HandlerInterceptor {
     
     // 세션에 loginUser 값이 없으면 로그인 화면으로 이동하는 기능 구현하기
     
-    
-    // loginUser가 null이라면, (로그인되지 않은 상태라면,)
     HttpSession session = request.getSession();
     if(session.getAttribute("loginUser") == null) {
       

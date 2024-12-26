@@ -45,6 +45,5 @@ public class UserDaoImpl implements IUserDao {
   public int deleteUser(int userId) {
     return template.delete("mybatis.mappers.userMapper.deleteUser", userId);
   }
- 
 
 }

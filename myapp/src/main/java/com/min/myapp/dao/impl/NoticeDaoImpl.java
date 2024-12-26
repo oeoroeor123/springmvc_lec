@@ -12,28 +12,22 @@ import com.min.myapp.dto.NoticeDto;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor // final 필드의 경우, 생성자 주입만 가능하기에 해당 annotation을 넣음
-@Repository // 서비스가 가져다 쓸 수 있도록 해당 annotation을 넣음
+@Repository
+@RequiredArgsConstructor
 public class NoticeDaoImpl implements INoticeDao {
 
-  // root-context에서 만든 SqlSessionTemplate bean을 활용
   private final SqlSessionTemplate template;
   
-  // 모든 메소드는 return만 있으면 된다.
-  // return 뒤에 template.을 먼저 부른다.
-  // 각 메소드에 맞는 함수를 호출 한다.
-  // mapper에 있는 namespace + 메소드 이름을 넣고, 파라미터 여부에 따라 뒤에 넣어준다.
-  
- @Override
+  @Override
   public List<NoticeDto> selectNoticeList(Map<String, Object> map) {
     return template.selectList("mybatis.mappers.noticeMapper.selectNoticeList", map);
-  } 
- 
- @Override
- public int selectNoticeCount() {
-    return template.selectOne("mybatis.mappers.noticeMapper.selectNoticeCount");
   }
   
+  @Override
+  public int selectNoticeCount() {
+    return template.selectOne("mybatis.mappers.noticeMapper.selectNoticeCount");
+  }
+
   @Override
   public NoticeDto selectNoticeById(int noticeId) {
     return template.selectOne("mybatis.mappers.noticeMapper.selectNoticeById", noticeId);
@@ -43,12 +37,12 @@ public class NoticeDaoImpl implements INoticeDao {
   public List<AttachDto> selectAttachListByNoticeId(int noticeId) {
     return template.selectList("mybatis.mappers.noticeMapper.selectAttachListByNoticeId", noticeId);
   }
-  
+
   @Override
   public AttachDto selectAttachById(int attachId) {
     return template.selectOne("mybatis.mappers.noticeMapper.selectAttachById", attachId);
   }
-
+  
   @Override
   public int insertNotice(NoticeDto noticeDto) {
     return template.insert("mybatis.mappers.noticeMapper.insertNotice", noticeDto);
@@ -61,9 +55,9 @@ public class NoticeDaoImpl implements INoticeDao {
 
   @Override
   public int deleteNotice(int noticeId) {
-    return template.delete("mybatis.mappers.noticeMapper.deleteNotice",noticeId);
+    return template.delete("mybatis.mappers.noticeMapper.deleteNotice", noticeId);
   }
-  
+
   @Override
   public int updateAttachDownloadCount(int attachId) {
     return template.update("mybatis.mappers.noticeMapper.updateAttachDownloadCount", attachId);
@@ -78,5 +72,5 @@ public class NoticeDaoImpl implements INoticeDao {
   public int selectSearchCount(Map<String, Object> map) {
     return template.selectOne("mybatis.mappers.noticeMapper.selectSearchCount", map);
   }
-
+  
 }

@@ -7,12 +7,9 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
- <!--
-  Spring Bean Configuration File (SpringContainer에 Bean을 만들어두는 파일) 
-  관계성 : 1번 만들어서 DI 의존성 주입으로 2번에 저장하는 관계 > 순차적 진행
-  -->
-  
-   <!-- HikariConfig -->
+
+
+  <!-- HikariConfig -->
   <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
     <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
     <property name="jdbcUrl"  value="jdbc:mysql://127.0.0.1:3306/db_myapp?serverTimezone=Asia/Seoul"/>

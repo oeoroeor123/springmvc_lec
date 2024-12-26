@@ -16,5 +16,11 @@ public interface IBbsDao {
   // 페이징 처리를 위한 갯수 체크
   int selectBbsCount(); 
   
+  // 댓글 업데이트 및 추가
+  int updateGroupOrder(BbsDto bbsDto);
+  
+  int insertBbsReply(BbsDto bbsDto); 
 
+  // 게시글 삭제
+  int deleteBbs(int bbsId);
 }
